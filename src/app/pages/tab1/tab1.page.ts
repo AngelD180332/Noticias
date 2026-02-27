@@ -8,7 +8,7 @@ import {
 } from '@ionic/angular/standalone';
 import { NewsService } from '../../services/news';
 import { Article } from 'src/app/interfaces';
-import { ArticleComponent } from "src/app/components/article/article.component";
+import { ArticleComponent } from 'src/app/components/articles/articles.component'; 
 
 @Component({
   selector: 'app-tab1',
@@ -20,11 +20,10 @@ import { ArticleComponent } from "src/app/components/article/article.component";
     IonGrid, IonRow, IonCol,
     IonCard, IonCardTitle, IonCardSubtitle, IonCardContent,
     IonImg,
-    ArticleComponent
-],
+    ArticleComponent 
+  ],
 })
 export class Tab1Page implements OnInit {
-
   public articles: Article[] = [];
   private newsService = inject(NewsService);
 

@@ -1,17 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Article } from '../../interfaces';
 import { NgFor, NgIf } from '@angular/common';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent,
   IonGrid, IonRow, IonCol,
   IonCard, IonCardTitle, IonCardSubtitle, IonCardContent,
   IonImg
-} from '@ionic/angular/standalone';
-import { NewsService } from '../../services/news';
-import { ArticleComponent } from "../article/article.component";
+} from '@ionic/angular/standalone';   // ← faltaba este "from '...'"
+import { Article } from '../../interfaces';  // ← faltaba el import de la interfaz
 
 @Component({
-  selector: 'app-articles',
+  selector: 'app-article',
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss'],
   imports: [
@@ -20,16 +18,12 @@ import { ArticleComponent } from "../article/article.component";
     IonGrid, IonRow, IonCol,
     IonCard, IonCardTitle, IonCardSubtitle, IonCardContent,
     IonImg,
-    ArticleComponent
-],
+  ],
 })
-export class ArticlesComponent{
+export class ArticleComponent implements OnInit {
+  @Input() article!: Article;   // ← faltaban ambos @Input
+  @Input() index!: number;
 
-  @Input() articles: Article[] = [];
-  
-
-  constructor() { }
-
+  constructor() {}
   ngOnInit() {}
-
 }
