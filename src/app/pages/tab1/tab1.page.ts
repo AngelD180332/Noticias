@@ -8,7 +8,7 @@ import {
 } from '@ionic/angular/standalone';
 import { NewsService } from '../../services/news';
 import { Article } from 'src/app/interfaces';
-import { ArticleComponent } from 'src/app/components/articles/articles.component'; 
+import { ArticlesComponent } from 'src/app/components/articles/articles.component'; 
 
 @Component({
   selector: 'app-tab1',
@@ -20,7 +20,7 @@ import { ArticleComponent } from 'src/app/components/articles/articles.component
     IonGrid, IonRow, IonCol,
     IonCard, IonCardTitle, IonCardSubtitle, IonCardContent,
     IonImg,
-    ArticleComponent 
+    ArticlesComponent  
   ],
 })
 export class Tab1Page implements OnInit {
