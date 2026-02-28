@@ -1,4 +1,4 @@
-import { key } from "ionicons/icons";
+// interfaces/index.ts — SIN el import de key
 
 export interface NewResponse {
     status:       string;
@@ -10,11 +10,11 @@ export interface Article {
     source:      Source;
     author?:     string;
     title:       string;
-    description?:string;
+    description?: string;
     url:         string;
     urlToImage?: string;
     publishedAt: Date;
-    content?:     string;
+    content?:    string;
 }
 
 export interface Source {
@@ -23,7 +23,7 @@ export interface Source {
 }
 
 export interface ArticlesByCategoryAndPage {
-    [key: string]: {
+    [key: string]: {       
         page: number;
         articles: Article[];
     }
