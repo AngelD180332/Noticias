@@ -1,49 +1,52 @@
-import { Component, NgModule, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { ExploreContainerComponent } from 'src/app/explore-container/explore-container.component';
-import { IonInfiniteScroll, IonInfiniteScrollContent} from '@ionic/angular/standalone';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, ViewChild, inject } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import {
+  IonHeader, IonToolbar, IonTitle, IonContent,
+  IonGrid, IonRow, IonCol,
+  IonCard, IonCardTitle, IonCardSubtitle, IonCardContent,
+  IonImg,
+  IonInfiniteScroll, IonInfiniteScrollContent
+} from '@ionic/angular/standalone';
+import { NewsService } from '../../services/news';
 import { Article } from 'src/app/interfaces';
-import { ArticleComponent } from 'src/app/components/article/article.component';
-import { NewsService } from 'src/app/services/news';
+import { ArticlesComponent } from 'src/app/components/articles/articles.component';
 
-@NgModule({
-  declarations: [],
+@Component({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  standalone: true,
+  selector: 'app-tab1',
+  templateUrl: 'tab1.page.html',
+  styleUrls: ['tab1.page.scss'],
   imports: [
-    CommonModule,
-    IonicModule,
-    FormsModule,
-    ExploreContainerComponent,
-    IonInfiniteScroll,
-    IonInfiniteScrollContent,
-    ArticleComponent,
-  ]
+    NgFor, NgIf,
+    IonHeader, IonToolbar, IonTitle, IonContent,
+    IonGrid, IonRow, IonCol,
+    IonCard, IonCardTitle, IonCardSubtitle, IonCardContent,
+    IonImg,
+    IonInfiniteScroll, IonInfiniteScrollContent,
+    ArticlesComponent,
+  ],
 })
-export class Tab1Module {
-  constructor( private newsService: NewsService ) {}
+export class Tab1Page implements OnInit {
+  @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll!: IonInfiniteScroll;
 
-  @ViewChild(IonInfiniteScroll, {static: true}) infiniteScroll!: IonInfiniteScroll;
+  public articles: Article[] = [];
+  private newsService = inject(NewsService);
 
-  ngOnInit(){
-    this.newsService.getTopHeadlines().subscribe(articles => this.articles.push(...articles));
+  ngOnInit() {
+    this.newsService.getTopHeadlines()
+      .subscribe(articles => this.articles.push(...articles));
   }
 
-
-  loadData( event: any ) {
-    this.newsService.getTopHeadlinesByCategory(this.selectedCategory, true)
-      .subscribe( articles => {
-
+  loadData(event: any) {
+    this.newsService.getTopHeadlines()
+      .subscribe(articles => {
         if (articles.length === this.articles.length) {
           this.infiniteScroll.disabled = true;
           return;
         }
-
         this.articles = articles;
         this.infiniteScroll.complete();
-      })
+      });
   }
-
-
-
- }
+}
