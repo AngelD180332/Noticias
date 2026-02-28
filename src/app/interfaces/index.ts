@@ -1,3 +1,5 @@
+import { key } from "ionicons/icons";
+
 export interface NewResponse {
     status:       string;
     totalResults: number;
@@ -20,6 +22,9 @@ export interface Source {
     name: string;
 }
 
-
-
-
+export interface ArticlesByCategoryAndPage {
+    [key: string]: {
+        page: number;
+        articles: Article[];
+    }
+}
