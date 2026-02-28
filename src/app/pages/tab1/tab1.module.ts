@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
@@ -23,8 +23,7 @@ import { NewsService } from 'src/app/services/news';
 export class Tab1Module {
   constructor( private newsService: NewsService ) {}
 
-  infiniteScroll: any;
-  newsService: any;
+  @ViewChild(IonInfiniteScroll, {static: true}) infiniteScroll!: IonInfiniteScroll;
 
   ngOnInit(){
     this.newsService.getTopHeadlines().subscribe(articles => this.articles.push(...articles));
